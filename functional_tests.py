@@ -1,8 +1,20 @@
 from selenium import webdriver
-browser = webdriver.Chrome('/usr/local/bin/chromedriver')
-browser.get('http://localhost:3000')
-try:
-    assert 'To-Do' in browser.title, "Browser title was " + browser.title
-finally:
-    browser.close()
-    browser.quit()
+import unittest
+
+
+class NewVisitorTest(unittest.TestCase):
+    def setUp(self):
+        self.browser = webdriver.Chrome('/usr/local/bin/chromedriver')
+
+    def tearDown(self):
+        self.browser.close()
+        self.browser.quit()
+
+    def test_can_start_a_list_and_retrieve_it_later(self):
+        self.browser.get('http://localhost:3000')
+        self.assertIn('To-Do', self.browser.title)
+        self.fail('Finish the test!')
+
+
+if __name__ == '__main__':
+    unittest.main(warnings='ignore')
