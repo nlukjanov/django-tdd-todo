@@ -16,8 +16,10 @@ class NewVisitorTest(unittest.TestCase):
         self.browser.get('http://localhost:3000')
         # She notices the page title and header mention to-do lists
         self.assertIn('To-Do', self.browser.title)
-        self.fail('Finish the test!')
+        header = self.browser.find_element_by_tag_name('h2')
+        self.assertIn('To-Do', header.text)
         # She is invited to enter a to-do item straight away
+        self.fail('Finish the test!')
 
         # She types "Buy peacock feathers" into a text box (Edith's hobby
         # is tying fly-fishing lures)
