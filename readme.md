@@ -1,8 +1,8 @@
 TESTS:
-  * TODO code smell, test is too long
+  * ~~TODO code smell, test is too long~~
 
 VIEWS:
-  * TODO don't save blank items
+  * ~~TODO don't save blank items~~
 
 
 * support more than 1 list
