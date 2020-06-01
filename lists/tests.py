@@ -1,3 +1,4 @@
+# pylint: disable=no-member
 from django.test import TestCase
 from lists.models import Item
 
@@ -8,8 +9,15 @@ class HomePageTest(TestCase):
         response = self.client.get('/')
         self.assertTemplateUsed(response, 'home.html')
 
-    def test_handles_post_request(self):
+    def test_handles_POST_request(self):
+
+        # TODO code smell, test is too long
+
         response = self.client.post('/', {'item_text': 'a list item'})
+        self.assertEqual(Item.objects.count(), 1)
+        new_item = Item.objects.first()
+        self.assertEqual(new_item.text, 'a list item')
+
         self.assertIn('a list item', response.content.decode())
         self.assertTemplateUsed(response, 'home.html')
 
@@ -31,5 +39,3 @@ class ItemModelTest(TestCase):
         second_saved_item = saved_items[1]
         self.assertEqual(first_saved_item.text, "The first (ever) list item")
         self.assertEqual(second_saved_item.text, "Item the second")
-
-
