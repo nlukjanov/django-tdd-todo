@@ -24,6 +24,13 @@ class HomePageTest(TestCase):
         self.client.get('/')
         self.assertEqual(Item.objects.count(), 0)
 
+
+class ListViewTest(TestCase):
+
+    def test_uses_list_template(self):
+        response = self.client.get('/lists/the-only-list/')
+        self.assertTemplateUsed(response, 'list.html')
+
     def test_displays_all_list_items(self):
         Item.objects.create(text='item 1')
         Item.objects.create(text='item 2')
