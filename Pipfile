@@ -9,7 +9,7 @@ autopep8 = "*"
 
 [packages]
 selenium = "*"
-django = "3.0.6"
+django = "*"
 
 [requires]
 python_version = "3.7"
