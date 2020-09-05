@@ -11,6 +11,7 @@ autopep8 = "*"
 selenium = "*"
 django = "*"
 gunicorn = "*"
+fabric3 = "*"
 
 [requires]
 python_version = "3.7"
