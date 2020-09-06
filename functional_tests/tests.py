@@ -5,11 +5,12 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.common.exceptions import WebDriverException
+from unittest import skip
 
 MAX_WAIT = 2
 
 
-class NewVisitorTest(StaticLiveServerTestCase):
+class FunctionalTest(StaticLiveServerTestCase):
     def setUp(self):
         self.browser = webdriver.Chrome('/usr/local/bin/chromedriver')
         staging_server = os.environ.get('STAGING_SERVER')
@@ -33,6 +34,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
                     raise e
                 time.sleep(0.5)
 
+
+class NewVisitorTest(FunctionalTest):
     def test_can_start_a_list_for_one_user_and_retrieve_it_later(self):
         # Edith has heard about a cool new online to-do app. She goes
         # to check out its homepage
@@ -118,6 +121,8 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertNotIn('Buy peacock feather', page_text)
         self.assertIn('Buy milk', page_text)
 
+
+class LayoutAndStylingTest(FunctionalTest):
     def test_layout_and_styling(self):
         # Edith goes to the home page
         self.browser.get(self.live_server_url)
@@ -128,7 +133,7 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width'] / 2,
             browser_size["width"] / 2,
-            delta = 10
+            delta=10
         )
 
         # She starts a new list and sees the input is nicely centered there too
@@ -139,5 +144,11 @@ class NewVisitorTest(StaticLiveServerTestCase):
         self.assertAlmostEqual(
             inputbox.location['x'] + inputbox.size['width'] / 2,
             browser_size["width"] / 2,
-            delta = 10
+            delta=10
         )
+
+
+class ItemValidationTest(FunctionalTest):
+    @skip
+    def test_cannot_add_empty_list_items(self):
+        self.fail('write me!')
