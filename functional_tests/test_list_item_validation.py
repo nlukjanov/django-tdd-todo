@@ -6,6 +6,7 @@ from unittest import skip
 
 
 class ItemValidationTest(FunctionalTest):
+    # @skip('functionality is not implemented yet')
     def test_cannot_add_empty_list_items(self):
         self.browser.get(self.live_server_url)
         self.browser.find_element_by_id('id_new_item').send_keys(Keys.ENTER)
